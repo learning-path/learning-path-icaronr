@@ -396,3 +396,734 @@ Processing by MainController#index as HTML
 Completed 200 OK in 390ms (Views: 385.7ms | ActiveRecord: 0.0ms)
 
 
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(6999985190184971670)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to DeviseCreateUsers (20190329032615)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (11.4ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20190329032615_devise_create_users.rb:5
+  [1m[35m (2.0ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_email" ON "users"  ("email")[0m
+  ↳ db/migrate/20190329032615_devise_create_users.rb:39
+  [1m[35m (2.3ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users"  ("reset_password_token")[0m
+  ↳ db/migrate/20190329032615_devise_create_users.rb:40
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190329032615"]]
+  ↳ bin/rails:9
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateCores (20190329033046)
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (5.9ms)[0m  [1m[35mCREATE TABLE "cores" ("id" bigserial primary key, "name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20190329033046_create_cores.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190329033046"]]
+  ↳ bin/rails:9
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateRoles (20190329033105)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (6.0ms)[0m  [1m[35mCREATE TABLE "roles" ("id" bigserial primary key, "name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20190329033105_create_roles.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190329033105"]]
+  ↳ bin/rails:9
+  [1m[35m (1.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateTroubles (20190329033115)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (6.3ms)[0m  [1m[35mCREATE TABLE "troubles" ("id" bigserial primary key, "name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20190329033115_create_troubles.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (1.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190329033115"]]
+  ↳ bin/rails:9
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to AddFieldsToUser (20190329033126)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "users" ADD "name" character varying[0m
+  ↳ db/migrate/20190329033126_add_fields_to_user.rb:3
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "users" ADD "admin" boolean[0m
+  ↳ db/migrate/20190329033126_add_fields_to_user.rb:4
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "users" ADD "role_id" bigint[0m
+  ↳ db/migrate/20190329033126_add_fields_to_user.rb:5
+  [1m[35m (2.7ms)[0m  [1m[35mCREATE  INDEX  "index_users_on_role_id" ON "users"  ("role_id")[0m
+  ↳ db/migrate/20190329033126_add_fields_to_user.rb:5
+  [1m[35m (2.7ms)[0m  [1m[35mALTER TABLE "users" ADD CONSTRAINT "fk_rails_642f17018b"
+FOREIGN KEY ("role_id")
+  REFERENCES "roles" ("id")
+[0m
+  ↳ db/migrate/20190329033126_add_fields_to_user.rb:5
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "users" ADD "core_id" bigint[0m
+  ↳ db/migrate/20190329033126_add_fields_to_user.rb:6
+  [1m[35m (2.4ms)[0m  [1m[35mCREATE  INDEX  "index_users_on_core_id" ON "users"  ("core_id")[0m
+  ↳ db/migrate/20190329033126_add_fields_to_user.rb:6
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "users" ADD CONSTRAINT "fk_rails_4e12d75d3d"
+FOREIGN KEY ("core_id")
+  REFERENCES "cores" ("id")
+[0m
+  ↳ db/migrate/20190329033126_add_fields_to_user.rb:6
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "users" ADD "active" boolean[0m
+  ↳ db/migrate/20190329033126_add_fields_to_user.rb:7
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190329033126"]]
+  ↳ bin/rails:9
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateFeedbacks (20190329034912)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (5.9ms)[0m  [1m[35mCREATE TABLE "feedbacks" ("id" bigserial primary key, "user_id" bigint, "description" text, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_c57bb6cf28"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  ↳ db/migrate/20190329034912_create_feedbacks.rb:3
+  [1m[35m (2.2ms)[0m  [1m[35mCREATE  INDEX  "index_feedbacks_on_user_id" ON "feedbacks"  ("user_id")[0m
+  ↳ db/migrate/20190329034912_create_feedbacks.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190329034912"]]
+  ↳ bin/rails:9
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateCustomers (20190329034920)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (5.5ms)[0m  [1m[35mCREATE TABLE "customers" ("id" bigserial primary key, "name" character varying, "email" character varying, "phone" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20190329034920_create_customers.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190329034920"]]
+  ↳ bin/rails:9
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateSteps (20190329034930)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (5.4ms)[0m  [1m[35mCREATE TABLE "steps" ("id" bigserial primary key, "name" character varying, "deadline" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20190329034930_create_steps.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190329034930"]]
+  ↳ bin/rails:9
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateDeals (20190329035007)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (6.7ms)[0m  [1m[35mCREATE TABLE "deals" ("id" bigserial primary key, "customer_id" bigint, "name" character varying, "description" text, "primary_seller_id" bigint, "secondary_seller_id" bigint, "start_date" date, "active" boolean, "done" boolean, "price" float, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_7e1cd45972"
+FOREIGN KEY ("customer_id")
+  REFERENCES "customers" ("id")
+, CONSTRAINT "fk_rails_e5e8ede5b2"
+FOREIGN KEY ("primary_seller_id")
+  REFERENCES "primary_sellers" ("id")
+, CONSTRAINT "fk_rails_b10938c472"
+FOREIGN KEY ("secondary_seller_id")
+  REFERENCES "secondary_sellers" ("id")
+)[0m
+  ↳ db/migrate/20190329035007_create_deals.rb:3
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(6999985190184971670)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  ↳ bin/rails:9
+  [1m[35m (114.6ms)[0m  [1m[35mDROP DATABASE IF EXISTS "template_development"[0m
+  ↳ bin/rails:9
+  [1m[35m (109.1ms)[0m  [1m[35mDROP DATABASE IF EXISTS "template_test"[0m
+  ↳ bin/rails:9
+  [1m[35m (273.6ms)[0m  [1m[35mCREATE DATABASE "template_development" ENCODING = 'unicode'[0m
+  ↳ bin/rails:9
+  [1m[35m (265.9ms)[0m  [1m[35mCREATE DATABASE "template_test" ENCODING = 'unicode'[0m
+  ↳ bin/rails:9
+  [1m[35m (7.6ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  ↳ bin/rails:9
+  [1m[35m (5.6ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(6999985190184971670)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to DeviseCreateUsers (20190329032615)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (5.8ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20190329032615_devise_create_users.rb:5
+  [1m[35m (2.4ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_email" ON "users"  ("email")[0m
+  ↳ db/migrate/20190329032615_devise_create_users.rb:39
+  [1m[35m (2.5ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users"  ("reset_password_token")[0m
+  ↳ db/migrate/20190329032615_devise_create_users.rb:40
+  [1m[36mActiveRecord::SchemaMigration Create (0.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190329032615"]]
+  ↳ bin/rails:9
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateCores (20190329033046)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (5.7ms)[0m  [1m[35mCREATE TABLE "cores" ("id" bigserial primary key, "name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20190329033046_create_cores.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190329033046"]]
+  ↳ bin/rails:9
+  [1m[35m (1.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateRoles (20190329033105)
+  [1m[35m (0.8ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (9.8ms)[0m  [1m[35mCREATE TABLE "roles" ("id" bigserial primary key, "name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20190329033105_create_roles.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190329033105"]]
+  ↳ bin/rails:9
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateTroubles (20190329033115)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (5.8ms)[0m  [1m[35mCREATE TABLE "troubles" ("id" bigserial primary key, "name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20190329033115_create_troubles.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190329033115"]]
+  ↳ bin/rails:9
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to AddFieldsToUser (20190329033126)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "name" character varying[0m
+  ↳ db/migrate/20190329033126_add_fields_to_user.rb:3
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "users" ADD "admin" boolean[0m
+  ↳ db/migrate/20190329033126_add_fields_to_user.rb:4
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "users" ADD "role_id" bigint[0m
+  ↳ db/migrate/20190329033126_add_fields_to_user.rb:5
+  [1m[35m (2.3ms)[0m  [1m[35mCREATE  INDEX  "index_users_on_role_id" ON "users"  ("role_id")[0m
+  ↳ db/migrate/20190329033126_add_fields_to_user.rb:5
+  [1m[35m (1.3ms)[0m  [1m[35mALTER TABLE "users" ADD CONSTRAINT "fk_rails_642f17018b"
+FOREIGN KEY ("role_id")
+  REFERENCES "roles" ("id")
+[0m
+  ↳ db/migrate/20190329033126_add_fields_to_user.rb:5
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "users" ADD "core_id" bigint[0m
+  ↳ db/migrate/20190329033126_add_fields_to_user.rb:6
+  [1m[35m (2.2ms)[0m  [1m[35mCREATE  INDEX  "index_users_on_core_id" ON "users"  ("core_id")[0m
+  ↳ db/migrate/20190329033126_add_fields_to_user.rb:6
+  [1m[35m (1.3ms)[0m  [1m[35mALTER TABLE "users" ADD CONSTRAINT "fk_rails_4e12d75d3d"
+FOREIGN KEY ("core_id")
+  REFERENCES "cores" ("id")
+[0m
+  ↳ db/migrate/20190329033126_add_fields_to_user.rb:6
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "users" ADD "active" boolean[0m
+  ↳ db/migrate/20190329033126_add_fields_to_user.rb:7
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190329033126"]]
+  ↳ bin/rails:9
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateFeedbacks (20190329034912)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (5.8ms)[0m  [1m[35mCREATE TABLE "feedbacks" ("id" bigserial primary key, "user_id" bigint, "description" text, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_c57bb6cf28"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  ↳ db/migrate/20190329034912_create_feedbacks.rb:3
+  [1m[35m (2.5ms)[0m  [1m[35mCREATE  INDEX  "index_feedbacks_on_user_id" ON "feedbacks"  ("user_id")[0m
+  ↳ db/migrate/20190329034912_create_feedbacks.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190329034912"]]
+  ↳ bin/rails:9
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateCustomers (20190329034920)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (5.1ms)[0m  [1m[35mCREATE TABLE "customers" ("id" bigserial primary key, "name" character varying, "email" character varying, "phone" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20190329034920_create_customers.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190329034920"]]
+  ↳ bin/rails:9
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateSteps (20190329034930)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (5.2ms)[0m  [1m[35mCREATE TABLE "steps" ("id" bigserial primary key, "name" character varying, "deadline" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20190329034930_create_steps.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190329034930"]]
+  ↳ bin/rails:9
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateDeals (20190329035007)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (5.1ms)[0m  [1m[35mCREATE TABLE "deals" ("id" bigserial primary key, "customer_id" bigint, "name" character varying, "description" text, "primary_seller_id" bigint, "secondary_seller_id" bigint, "start_date" date, "active" boolean, "done" boolean, "price" float, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_7e1cd45972"
+FOREIGN KEY ("customer_id")
+  REFERENCES "customers" ("id")
+)[0m
+  ↳ db/migrate/20190329035007_create_deals.rb:3
+  [1m[35m (2.4ms)[0m  [1m[35mCREATE  INDEX  "index_deals_on_customer_id" ON "deals"  ("customer_id")[0m
+  ↳ db/migrate/20190329035007_create_deals.rb:3
+  [1m[35m (2.3ms)[0m  [1m[35mCREATE  INDEX  "index_deals_on_primary_seller_id" ON "deals"  ("primary_seller_id")[0m
+  ↳ db/migrate/20190329035007_create_deals.rb:3
+  [1m[35m (2.4ms)[0m  [1m[35mCREATE  INDEX  "index_deals_on_secondary_seller_id" ON "deals"  ("secondary_seller_id")[0m
+  ↳ db/migrate/20190329035007_create_deals.rb:3
+  [1m[35m (1.2ms)[0m  [1m[35mALTER TABLE "deals" ADD CONSTRAINT "fk_rails_e5e8ede5b2"
+FOREIGN KEY ("primary_seller_id")
+  REFERENCES "users" ("id")
+[0m
+  ↳ db/migrate/20190329035007_create_deals.rb:16
+  [1m[35m (0.9ms)[0m  [1m[35mALTER TABLE "deals" ADD CONSTRAINT "fk_rails_b10938c472"
+FOREIGN KEY ("secondary_seller_id")
+  REFERENCES "users" ("id")
+[0m
+  ↳ db/migrate/20190329035007_create_deals.rb:17
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190329035007"]]
+  ↳ bin/rails:9
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateDealSteps (20190329035036)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (4.3ms)[0m  [1m[35mCREATE TABLE "deal_steps" ("id" bigserial primary key, "step_id" bigint, "deal_id" bigint, "entry_date" date, "conclusion_date" date, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_c4e5fbe4b7"
+FOREIGN KEY ("step_id")
+  REFERENCES "steps" ("id")
+, CONSTRAINT "fk_rails_9430ca4ed3"
+FOREIGN KEY ("deal_id")
+  REFERENCES "deals" ("id")
+)[0m
+  ↳ db/migrate/20190329035036_create_deal_steps.rb:3
+  [1m[35m (2.0ms)[0m  [1m[35mCREATE  INDEX  "index_deal_steps_on_step_id" ON "deal_steps"  ("step_id")[0m
+  ↳ db/migrate/20190329035036_create_deal_steps.rb:3
+  [1m[35m (2.2ms)[0m  [1m[35mCREATE  INDEX  "index_deal_steps_on_deal_id" ON "deal_steps"  ("deal_id")[0m
+  ↳ db/migrate/20190329035036_create_deal_steps.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190329035036"]]
+  ↳ bin/rails:9
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateTags (20190329035042)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (6.0ms)[0m  [1m[35mCREATE TABLE "tags" ("id" bigserial primary key, "name" character varying, "color" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20190329035042_create_tags.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190329035042"]]
+  ↳ bin/rails:9
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateDealTags (20190329035056)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (3.3ms)[0m  [1m[35mCREATE TABLE "deal_tags" ("id" bigserial primary key, "deal_id" bigint, "tag_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_74ca825fd9"
+FOREIGN KEY ("deal_id")
+  REFERENCES "deals" ("id")
+, CONSTRAINT "fk_rails_36a27d094c"
+FOREIGN KEY ("tag_id")
+  REFERENCES "tags" ("id")
+)[0m
+  ↳ db/migrate/20190329035056_create_deal_tags.rb:3
+  [1m[35m (2.3ms)[0m  [1m[35mCREATE  INDEX  "index_deal_tags_on_deal_id" ON "deal_tags"  ("deal_id")[0m
+  ↳ db/migrate/20190329035056_create_deal_tags.rb:3
+  [1m[35m (2.3ms)[0m  [1m[35mCREATE  INDEX  "index_deal_tags_on_tag_id" ON "deal_tags"  ("tag_id")[0m
+  ↳ db/migrate/20190329035056_create_deal_tags.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190329035056"]]
+  ↳ bin/rails:9
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateProjects (20190329035106)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (5.9ms)[0m  [1m[35mCREATE TABLE "projects" ("id" bigserial primary key, "name" character varying, "description" text, "price" float, "customer_id" bigint, "start_date" date, "conclusion_date" date, "open_scope" boolean, "sprints" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_47c768ed16"
+FOREIGN KEY ("customer_id")
+  REFERENCES "customers" ("id")
+)[0m
+  ↳ db/migrate/20190329035106_create_projects.rb:3
+  [1m[35m (2.1ms)[0m  [1m[35mCREATE  INDEX  "index_projects_on_customer_id" ON "projects"  ("customer_id")[0m
+  ↳ db/migrate/20190329035106_create_projects.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190329035106"]]
+  ↳ bin/rails:9
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateRequirements (20190329035142)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (5.6ms)[0m  [1m[35mCREATE TABLE "requirements" ("id" bigserial primary key, "name" character varying, "price" float, "sprints" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20190329035142_create_requirements.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190329035142"]]
+  ↳ bin/rails:9
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateProjectRequirements (20190329035148)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (3.9ms)[0m  [1m[35mCREATE TABLE "project_requirements" ("id" bigserial primary key, "project_id" bigint, "requirement_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_d1dd04a8fd"
+FOREIGN KEY ("project_id")
+  REFERENCES "projects" ("id")
+, CONSTRAINT "fk_rails_70df0377e9"
+FOREIGN KEY ("requirement_id")
+  REFERENCES "requirements" ("id")
+)[0m
+  ↳ db/migrate/20190329035148_create_project_requirements.rb:3
+  [1m[35m (2.2ms)[0m  [1m[35mCREATE  INDEX  "index_project_requirements_on_project_id" ON "project_requirements"  ("project_id")[0m
+  ↳ db/migrate/20190329035148_create_project_requirements.rb:3
+  [1m[35m (2.1ms)[0m  [1m[35mCREATE  INDEX  "index_project_requirements_on_requirement_id" ON "project_requirements"  ("requirement_id")[0m
+  ↳ db/migrate/20190329035148_create_project_requirements.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190329035148"]]
+  ↳ bin/rails:9
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateProjectDevelopers (20190329035159)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (6.8ms)[0m  [1m[35mCREATE TABLE "project_developers" ("id" bigserial primary key, "project_id" bigint, "user_id" bigint, "project_manager" boolean, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_caa521d3a8"
+FOREIGN KEY ("project_id")
+  REFERENCES "projects" ("id")
+, CONSTRAINT "fk_rails_17057fa45e"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  ↳ db/migrate/20190329035159_create_project_developers.rb:3
+  [1m[35m (2.4ms)[0m  [1m[35mCREATE  INDEX  "index_project_developers_on_project_id" ON "project_developers"  ("project_id")[0m
+  ↳ db/migrate/20190329035159_create_project_developers.rb:3
+  [1m[35m (2.3ms)[0m  [1m[35mCREATE  INDEX  "index_project_developers_on_user_id" ON "project_developers"  ("user_id")[0m
+  ↳ db/migrate/20190329035159_create_project_developers.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190329035159"]]
+  ↳ bin/rails:9
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Create (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2019-03-29 03:57:56.410412"], ["updated_at", "2019-03-29 03:57:56.410412"]]
+  ↳ bin/rails:9
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(6999985190184971670)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(6999985190184971670)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to CreateProjectTags (20190329040838)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (5.6ms)[0m  [1m[35mCREATE TABLE "project_tags" ("id" bigserial primary key, "project_id" bigint, "tag_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_a52ff3d861"
+FOREIGN KEY ("project_id")
+  REFERENCES "projects" ("id")
+, CONSTRAINT "fk_rails_980b91da53"
+FOREIGN KEY ("tag_id")
+  REFERENCES "tags" ("id")
+)[0m
+  ↳ db/migrate/20190329040838_create_project_tags.rb:3
+  [1m[35m (7.4ms)[0m  [1m[35mCREATE  INDEX  "index_project_tags_on_project_id" ON "project_tags"  ("project_id")[0m
+  ↳ db/migrate/20190329040838_create_project_tags.rb:3
+  [1m[35m (2.5ms)[0m  [1m[35mCREATE  INDEX  "index_project_tags_on_tag_id" ON "project_tags"  ("tag_id")[0m
+  ↳ db/migrate/20190329040838_create_project_tags.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190329040838"]]
+  ↳ bin/rails:9
+  [1m[35m (1.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(6999985190184971670)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(6999985190184971670)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to CreateUserTroubles (20190329041401)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (10.0ms)[0m  [1m[35mCREATE TABLE "user_troubles" ("id" bigserial primary key, "user_id" bigint, "trouble_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_4dac391ac5"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+, CONSTRAINT "fk_rails_edeb0e808f"
+FOREIGN KEY ("trouble_id")
+  REFERENCES "troubles" ("id")
+)[0m
+  ↳ db/migrate/20190329041401_create_user_troubles.rb:3
+  [1m[35m (2.2ms)[0m  [1m[35mCREATE  INDEX  "index_user_troubles_on_user_id" ON "user_troubles"  ("user_id")[0m
+  ↳ db/migrate/20190329041401_create_user_troubles.rb:3
+  [1m[35m (2.1ms)[0m  [1m[35mCREATE  INDEX  "index_user_troubles_on_trouble_id" ON "user_troubles"  ("trouble_id")[0m
+  ↳ db/migrate/20190329041401_create_user_troubles.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190329041401"]]
+  ↳ bin/rails:9
+  [1m[35m (1.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(6999985190184971670)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[36mTrouble Load (0.4ms)[0m  [1m[34mSELECT "troubles".* FROM "troubles"[0m
+  ↳ db/seeds.rb:9
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:10
+  [1m[36mTrouble Create (0.7ms)[0m  [1m[32mINSERT INTO "troubles" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "OAC"], ["created_at", "2019-03-29 04:25:27.655036"], ["updated_at", "2019-03-29 04:25:27.655036"]]
+  ↳ db/seeds.rb:10
+  [1m[35m (4.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:10
+  [1m[36mRole Load (0.4ms)[0m  [1m[34mSELECT "roles".* FROM "roles"[0m
+  ↳ db/seeds.rb:12
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:13
+  [1m[36mRole Create (0.3ms)[0m  [1m[32mINSERT INTO "roles" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Gerente"], ["created_at", "2019-03-29 04:25:27.667869"], ["updated_at", "2019-03-29 04:25:27.667869"]]
+  ↳ db/seeds.rb:13
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:13
+  [1m[36mCore Load (0.3ms)[0m  [1m[34mSELECT "cores".* FROM "cores"[0m
+  ↳ db/seeds.rb:15
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:16
+  [1m[36mCore Create (0.3ms)[0m  [1m[32mINSERT INTO "cores" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "NUT"], ["created_at", "2019-03-29 04:25:27.675735"], ["updated_at", "2019-03-29 04:25:27.675735"]]
+  ↳ db/seeds.rb:16
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:16
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ db/seeds.rb:18
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:19
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "icarorezende@cjr.org.br"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:19
+  [1m[36mUser Create (0.9ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at", "name", "admin", "role_id", "core_id", "active") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["email", "icarorezende@cjr.org.br"], ["encrypted_password", "$2a$11$g1b50WQwLhmifaZ1C9mo6.luxV3ZDj0gPRjrWLMbzcXfUy7qrXa4i"], ["created_at", "2019-03-29 04:25:27.927020"], ["updated_at", "2019-03-29 04:25:27.927020"], ["name", "Icaro"], ["admin", false], ["role_id", 1], ["core_id", 1], ["active", true]]
+  ↳ db/seeds.rb:19
+  [1m[35m (4.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:19
+  [1m[36mUserTrouble Load (0.5ms)[0m  [1m[34mSELECT "user_troubles".* FROM "user_troubles"[0m
+  ↳ db/seeds.rb:21
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:22
+  [1m[36mTrouble Load (0.4ms)[0m  [1m[34mSELECT  "troubles".* FROM "troubles" WHERE "troubles"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:22
+  [1m[36mUserTrouble Create (1.3ms)[0m  [1m[32mINSERT INTO "user_troubles" ("user_id", "trouble_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["user_id", 1], ["trouble_id", 1], ["created_at", "2019-03-29 04:25:27.999717"], ["updated_at", "2019-03-29 04:25:27.999717"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (4.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mUserTrouble Load (0.5ms)[0m  [1m[34mSELECT  "user_troubles".* FROM "user_troubles" LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mTrouble Load (0.4ms)[0m  [1m[34mSELECT  "troubles".* FROM "troubles" INNER JOIN "user_troubles" ON "troubles"."id" = "user_troubles"."trouble_id" WHERE "user_troubles"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 11]]
+  [1m[36mTrouble Load (0.5ms)[0m  [1m[34mSELECT  "troubles".* FROM "troubles" INNER JOIN "user_troubles" ON "troubles"."id" = "user_troubles"."trouble_id" WHERE "user_troubles"."user_id" = $1 ORDER BY "troubles"."id" ASC LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[36mTrouble Load (0.5ms)[0m  [1m[34mSELECT "troubles".* FROM "troubles"[0m
+  ↳ db/seeds.rb:9
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:9
+  [1m[36mUserTrouble Load (0.3ms)[0m  [1m[34mSELECT "user_troubles".* FROM "user_troubles" WHERE "user_troubles"."trouble_id" = $1[0m  [["trouble_id", 1]]
+  ↳ db/seeds.rb:9
+  [1m[36mUserTrouble Destroy (0.3ms)[0m  [1m[31mDELETE FROM "user_troubles" WHERE "user_troubles"."id" = $1[0m  [["id", 1]]
+  ↳ db/seeds.rb:9
+  [1m[36mTrouble Destroy (0.6ms)[0m  [1m[31mDELETE FROM "troubles" WHERE "troubles"."id" = $1[0m  [["id", 1]]
+  ↳ db/seeds.rb:9
+  [1m[35m (4.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:9
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:10
+  [1m[36mTrouble Create (0.3ms)[0m  [1m[32mINSERT INTO "troubles" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "OAC"], ["created_at", "2019-03-29 04:37:28.893591"], ["updated_at", "2019-03-29 04:37:28.893591"]]
+  ↳ db/seeds.rb:10
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:10
+  [1m[36mRole Load (0.3ms)[0m  [1m[34mSELECT "roles".* FROM "roles"[0m
+  ↳ db/seeds.rb:12
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:12
+  [1m[36mRole Destroy (1.5ms)[0m  [1m[31mDELETE FROM "roles" WHERE "roles"."id" = $1[0m  [["id", 1]]
+  ↳ db/seeds.rb:12
+  [1m[35m (0.6ms)[0m  [1m[31mROLLBACK[0m
+  ↳ db/seeds.rb:12
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[36mTrouble Load (0.3ms)[0m  [1m[34mSELECT "troubles".* FROM "troubles"[0m
+  ↳ db/seeds.rb:9
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:9
+  [1m[36mUserTrouble Load (0.4ms)[0m  [1m[34mSELECT "user_troubles".* FROM "user_troubles" WHERE "user_troubles"."trouble_id" = $1[0m  [["trouble_id", 2]]
+  ↳ db/seeds.rb:9
+  [1m[36mTrouble Destroy (0.5ms)[0m  [1m[31mDELETE FROM "troubles" WHERE "troubles"."id" = $1[0m  [["id", 2]]
+  ↳ db/seeds.rb:9
+  [1m[35m (4.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:9
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:10
+  [1m[36mTrouble Create (0.3ms)[0m  [1m[32mINSERT INTO "troubles" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "OAC"], ["created_at", "2019-03-29 04:38:13.877458"], ["updated_at", "2019-03-29 04:38:13.877458"]]
+  ↳ db/seeds.rb:10
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:10
+  [1m[36mRole Load (0.3ms)[0m  [1m[34mSELECT "roles".* FROM "roles"[0m
+  ↳ db/seeds.rb:12
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:12
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."role_id" = $1[0m  [["role_id", 1]]
+  ↳ db/seeds.rb:12
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  ↳ db/seeds.rb:12
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[36mTrouble Load (0.7ms)[0m  [1m[34mSELECT "troubles".* FROM "troubles"[0m
+  ↳ db/seeds.rb:9
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:9
+  [1m[36mUserTrouble Load (0.3ms)[0m  [1m[34mSELECT "user_troubles".* FROM "user_troubles" WHERE "user_troubles"."trouble_id" = $1[0m  [["trouble_id", 3]]
+  ↳ db/seeds.rb:9
+  [1m[36mTrouble Destroy (0.5ms)[0m  [1m[31mDELETE FROM "troubles" WHERE "troubles"."id" = $1[0m  [["id", 3]]
+  ↳ db/seeds.rb:9
+  [1m[35m (4.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:9
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:10
+  [1m[36mTrouble Create (0.3ms)[0m  [1m[32mINSERT INTO "troubles" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "OAC"], ["created_at", "2019-03-29 04:38:47.293677"], ["updated_at", "2019-03-29 04:38:47.293677"]]
+  ↳ db/seeds.rb:10
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:10
+  [1m[36mRole Load (0.3ms)[0m  [1m[34mSELECT "roles".* FROM "roles"[0m
+  ↳ db/seeds.rb:12
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:12
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."role_id" = $1[0m  [["role_id", 1]]
+  ↳ db/seeds.rb:12
+  [1m[36mDeal Load (0.3ms)[0m  [1m[34mSELECT "deals".* FROM "deals" WHERE "deals"."primary_seller_id" = $1[0m  [["primary_seller_id", 1]]
+  ↳ db/seeds.rb:12
+  [1m[36mDeal Load (0.2ms)[0m  [1m[34mSELECT "deals".* FROM "deals" WHERE "deals"."secondary_seller_id" = $1[0m  [["secondary_seller_id", 1]]
+  ↳ db/seeds.rb:12
+  [1m[36mFeedback Load (0.4ms)[0m  [1m[34mSELECT "feedbacks".* FROM "feedbacks" WHERE "feedbacks"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ db/seeds.rb:12
+  [1m[36mUserTrouble Load (0.2ms)[0m  [1m[34mSELECT "user_troubles".* FROM "user_troubles" WHERE "user_troubles"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ db/seeds.rb:12
+  [1m[36mProjectDeveloper Load (0.2ms)[0m  [1m[34mSELECT "project_developers".* FROM "project_developers" WHERE "project_developers"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ db/seeds.rb:12
+  [1m[36mUser Destroy (0.9ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 1]]
+  ↳ db/seeds.rb:12
+  [1m[36mRole Destroy (0.4ms)[0m  [1m[31mDELETE FROM "roles" WHERE "roles"."id" = $1[0m  [["id", 1]]
+  ↳ db/seeds.rb:12
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:12
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:13
+  [1m[36mRole Create (0.2ms)[0m  [1m[32mINSERT INTO "roles" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Gerente"], ["created_at", "2019-03-29 04:38:47.334346"], ["updated_at", "2019-03-29 04:38:47.334346"]]
+  ↳ db/seeds.rb:13
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:13
+  [1m[36mCore Load (0.3ms)[0m  [1m[34mSELECT "cores".* FROM "cores"[0m
+  ↳ db/seeds.rb:15
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:15
+  [1m[36mCore Destroy (0.4ms)[0m  [1m[31mDELETE FROM "cores" WHERE "cores"."id" = $1[0m  [["id", 1]]
+  ↳ db/seeds.rb:15
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:15
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:16
+  [1m[36mCore Create (0.2ms)[0m  [1m[32mINSERT INTO "cores" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "NUT"], ["created_at", "2019-03-29 04:38:47.344387"], ["updated_at", "2019-03-29 04:38:47.344387"]]
+  ↳ db/seeds.rb:16
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:16
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ db/seeds.rb:18
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:19
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "icarorezende@cjr.org.br"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:19
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at", "name", "admin", "role_id", "core_id", "active") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["email", "icarorezende@cjr.org.br"], ["encrypted_password", "$2a$11$4nsjKH2lBCtg6eELHSOhjuJXC7m.kyOhfFKSV78khawOZWcpV.QOC"], ["created_at", "2019-03-29 04:38:47.459727"], ["updated_at", "2019-03-29 04:38:47.459727"], ["name", "Icaro Rezende"], ["admin", false], ["role_id", 2], ["core_id", 2], ["active", true]]
+  ↳ db/seeds.rb:19
+  [1m[35m (4.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:19
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:20
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "vitorbandeira@cjr.org.br"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:20
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at", "name", "admin", "role_id", "core_id", "active") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["email", "vitorbandeira@cjr.org.br"], ["encrypted_password", "$2a$11$xU6Y3NY5o68LopF4l3BwDe2Mz97JGTXyticPMdVu2PDaymbI12JLu"], ["created_at", "2019-03-29 04:38:47.575134"], ["updated_at", "2019-03-29 04:38:47.575134"], ["name", "Vitor Ribas"], ["admin", false], ["role_id", 2], ["core_id", 2], ["active", true]]
+  ↳ db/seeds.rb:20
+  [1m[35m (4.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:20
+  [1m[36mUserTrouble Load (0.5ms)[0m  [1m[34mSELECT "user_troubles".* FROM "user_troubles"[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:23
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ db/seeds.rb:23
+  [1m[36mTrouble Load (0.2ms)[0m  [1m[34mSELECT  "troubles".* FROM "troubles" WHERE "troubles"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ db/seeds.rb:23
+  [1m[36mUserTrouble Create (0.4ms)[0m  [1m[32mINSERT INTO "user_troubles" ("user_id", "trouble_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["user_id", 2], ["trouble_id", 4], ["created_at", "2019-03-29 04:38:47.590242"], ["updated_at", "2019-03-29 04:38:47.590242"]]
+  ↳ db/seeds.rb:23
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:23
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:24
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ db/seeds.rb:24
+  [1m[36mTrouble Load (0.1ms)[0m  [1m[34mSELECT  "troubles".* FROM "troubles" WHERE "troubles"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ db/seeds.rb:24
+  [1m[36mUserTrouble Create (0.3ms)[0m  [1m[32mINSERT INTO "user_troubles" ("user_id", "trouble_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["user_id", 3], ["trouble_id", 4], ["created_at", "2019-03-29 04:38:47.594240"], ["updated_at", "2019-03-29 04:38:47.594240"]]
+  ↳ db/seeds.rb:24
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:24
+  [1m[36mStep Load (0.3ms)[0m  [1m[34mSELECT "steps".* FROM "steps"[0m
+  ↳ db/seeds.rb:26
+  [1m[35m (3.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:27
+  [1m[36mStep Create (0.4ms)[0m  [1m[32mINSERT INTO "steps" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Apresentação"], ["created_at", "2019-03-29 04:38:47.607876"], ["updated_at", "2019-03-29 04:38:47.607876"]]
+  ↳ db/seeds.rb:27
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:27
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:28
+  [1m[36mStep Create (0.3ms)[0m  [1m[32mINSERT INTO "steps" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Contato"], ["created_at", "2019-03-29 04:38:47.611214"], ["updated_at", "2019-03-29 04:38:47.611214"]]
+  ↳ db/seeds.rb:28
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:28
+  [1m[36mCustomer Load (0.4ms)[0m  [1m[34mSELECT "customers".* FROM "customers"[0m
+  ↳ db/seeds.rb:30
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:31
+  [1m[36mCustomer Create (0.4ms)[0m  [1m[32mINSERT INTO "customers" ("name", "email", "phone", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Bruno Lopes"], ["email", "vasila1@vasilo.com"], ["phone", "123456789"], ["created_at", "2019-03-29 04:38:47.622472"], ["updated_at", "2019-03-29 04:38:47.622472"]]
+  ↳ db/seeds.rb:31
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:31
+  [1m[36mTag Load (0.4ms)[0m  [1m[34mSELECT "tags".* FROM "tags"[0m
+  ↳ db/seeds.rb:33
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:34
+  [1m[36mTag Create (0.4ms)[0m  [1m[32mINSERT INTO "tags" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Empresa"], ["created_at", "2019-03-29 04:38:47.633804"], ["updated_at", "2019-03-29 04:38:47.633804"]]
+  ↳ db/seeds.rb:34
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:34
+  [1m[36mDeal Load (0.2ms)[0m  [1m[34mSELECT "deals".* FROM "deals"[0m
+  ↳ db/seeds.rb:36
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:37
+  [1m[36mCustomer Load (0.2ms)[0m  [1m[34mSELECT  "customers".* FROM "customers" WHERE "customers"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:37
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ db/seeds.rb:37
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ db/seeds.rb:37
+  [1m[36mDeal Create (0.7ms)[0m  [1m[32mINSERT INTO "deals" ("customer_id", "name", "description", "primary_seller_id", "secondary_seller_id", "start_date", "active", "done", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["customer_id", 1], ["name", "proaDHO"], ["description", "Rogue"], ["primary_seller_id", 2], ["secondary_seller_id", 3], ["start_date", "2019-01-10"], ["active", true], ["done", false], ["price", 8.88], ["created_at", "2019-03-29 04:38:47.648512"], ["updated_at", "2019-03-29 04:38:47.648512"]]
+  ↳ db/seeds.rb:37
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:37
+  [1m[36mDeal Load (0.6ms)[0m  [1m[34mSELECT  "deals".* FROM "deals" ORDER BY "deals"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mDeal Load (0.6ms)[0m  [1m[34mSELECT  "deals".* FROM "deals" ORDER BY "deals"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mDeal Load (0.4ms)[0m  [1m[34mSELECT  "deals".* FROM "deals" ORDER BY "deals"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mDeal Load (0.5ms)[0m  [1m[34mSELECT  "deals".* FROM "deals" ORDER BY "deals"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
